@@ -1,0 +1,24 @@
+<section class="form-card">
+  <p class="eyebrow">GROW YOUR COLLECTION</p>
+  <h1>Add a Movie</h1>
+  <p class="intro">Save a movie here so you can find it when you are ready to watch.</p>
+
+  <form (ngSubmit)="addMovie()">
+    <div class="form-field">
+      <label for="title">Movie title</label>
+      <input id="title" type="text" name="title" [(ngModel)]="title" required>
+    </div>
+
+    <div class="form-field">
+      <label for="genre">Genre</label>
+      <input id="genre" type="text" name="genre" [(ngModel)]="genre" required>
+    </div>
+
+    <div class="form-field">
+      <label for="year">Release year</label>
+      <input id="year" type="number" name="year" [(ngModel)]="year" required>
+    </div>
+
+    <button type="submit">Add Movie</button>
+  </form>
+</section>

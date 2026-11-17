@@ -1,0 +1,4 @@
+.page-content {
+  width: min(900px, calc(100% - 32px));
+  margin: 40px auto;
+}

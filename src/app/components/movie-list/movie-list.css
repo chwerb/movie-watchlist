@@ -1,0 +1,77 @@
+h1 {
+  margin: 0 0 24px;
+  color: #1f3155;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #3157a4;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid #e0e5ee;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 12px #1f315508;
+}
+
+.movie-details h2 {
+  margin: 0;
+  color: #1f3155;
+  font-size: 20px;
+}
+
+.movie-details p {
+  margin: 4px 0 0;
+  color: #687386;
+}
+
+.movie-status {
+  margin: 0;
+  border-radius: 20px;
+  background: #fff2d6;
+  color: #805800;
+  font-size: 14px;
+  padding: 3px 10px;
+}
+
+.movie-status.watched {
+  background: #e2f4e9;
+  color: #23643a;
+}
+
+.empty-message {
+  padding: 24px;
+  border-radius: 10px;
+  background: white;
+  color: #687386;
+}
+
+.movie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.movie-actions .delete-button {
+  background: #e8ebf1;
+  color: #344054;
+}
+
+.movie-actions .delete-button:hover {
+  background: #d9dee8;
+}

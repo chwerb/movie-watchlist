@@ -1,0 +1,63 @@
+.welcome-card {
+  padding: 48px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 5px 20px #1f315510;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #3157a4;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 0;
+  color: #1f3155;
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1.2;
+}
+
+.welcome-card > p:not(.eyebrow) {
+  max-width: 570px;
+  color: #5b6473;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.home-actions a {
+  border-radius: 6px;
+  padding: 10px 16px;
+  text-decoration: none;
+}
+
+.primary-link {
+  background: #3157a4;
+  color: white;
+}
+
+.primary-link:hover {
+  background: #244582;
+}
+
+.secondary-link {
+  border: 1px solid #cbd3e1;
+  color: #1f3155;
+}
+
+.secondary-link:hover {
+  background: #f4f6fb;
+}
+
+@media (max-width: 520px) {
+  .welcome-card {
+    padding: 28px 22px;
+  }
+}

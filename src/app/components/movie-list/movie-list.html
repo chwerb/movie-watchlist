@@ -1,0 +1,30 @@
+<section>
+  <div class="list-heading">
+    <div>
+      <p class="eyebrow">YOUR COLLECTION</p>
+      <h1>My Movie Watchlist</h1>
+    </div>
+  </div>
+
+  <p *ngIf="movies().length === 0" class="empty-message">
+    Your watchlist is empty. Add a movie to get started!
+  </p>
+
+  <div class="movie-grid">
+    <article *ngFor="let movie of movies()" class="movie-card">
+      <div class="movie-details">
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.genre }} <span aria-hidden="true">·</span> {{ movie.year }}</p>
+      </div>
+
+      <p class="movie-status" [class.watched]="movie.watched">
+        {{ movie.watched ? 'Watched' : 'Not watched yet' }}
+      </p>
+
+      <div class="movie-actions">
+        <button (click)="toggleWatched(movie.id)">Change status</button>
+        <button class="delete-button" (click)="deleteMovie(movie.id)">Delete</button>
+      </div>
+    </article>
+  </div>
+</section>

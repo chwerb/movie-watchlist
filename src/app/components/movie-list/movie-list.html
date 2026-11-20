@@ -6,20 +6,112 @@
     </div>
   </div>
 
+  <div class="list-controls" role="search" aria-label="Search and filter your movies">
+    <div class="control-field search-field">
+      <label for="movie-search">Search movies</label>
+      <input #searchInput id="movie-search" type="search" placeholder="Search by title or category"
+        [value]="searchQuery()" (input)="searchQuery.set(searchInput.value)">
+    </div>
+
+    <div class="control-field">
+      <label for="category-filter">Category</label>
+      <select #categorySelect id="category-filter" [value]="categoryFilter()" (change)="categoryFilter.set(categorySelect.value)">
+        <option value="">All categories</option>
+        <option *ngFor="let category of categoriesInCollection()" [value]="category">{{ category }}</option>
+      </select>
+    </div>
+
+    <div class="control-field">
+      <label for="year-filter">Release year</label>
+      <select #yearSelect id="year-filter" [value]="yearFilter()" (change)="yearFilter.set(yearSelect.value)">
+        <option value="all">All years</option>
+        <option *ngFor="let year of years()" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+
+    <div class="control-field">
+      <label for="rating-filter">Rating</label>
+      <select #ratingSelect id="rating-filter" [value]="ratingFilter()" (change)="ratingFilter.set(ratingSelect.value)">
+        <option value="all">All ratings</option>
+        <option value="unrated">Not rated yet</option>
+        <option *ngFor="let star of stars" [value]="star">{{ star === 5 ? '5 stars' : star + '+ stars' }}</option>
+      </select>
+    </div>
+
+    <div class="control-field">
+      <label for="movie-sort">Sort by</label>
+      <select #sortSelect id="movie-sort" [value]="sortOrder()" (change)="setSortOrder(sortSelect.value)">
+        <option value="default">Original order</option>
+        <option value="title-asc">Title: A to Z</option>
+        <option value="title-desc">Title: Z to A</option>
+        <option value="year-desc">Release year: newest first</option>
+        <option value="year-asc">Release year: oldest first</option>
+        <option value="rating-desc">Rating: highest first</option>
+        <option value="rating-asc">Rating: lowest first</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="list-summary">
+    <p aria-live="polite">Showing {{ visibleMovies().length }} of {{ movies().length }} movies</p>
+    <button *ngIf="hasActiveControls()" type="button" class="reset-controls" (click)="resetControls()">
+      Reset search and filters
+    </button>
+  </div>
+
   <p *ngIf="movies().length === 0" class="empty-message">
     Your watchlist is empty. Add a movie to get started!
   </p>
 
+  <p *ngIf="movies().length > 0 && visibleMovies().length === 0" class="empty-message">
+    No movies match your search and filters. Try another title, category, year, or rating.
+  </p>
+
   <div class="movie-grid">
-    <article *ngFor="let movie of movies()" class="movie-card">
+    <article *ngFor="let movie of visibleMovies(); trackBy: trackMovieById" class="movie-card">
       <div class="movie-details">
         <h2>{{ movie.title }}</h2>
         <p>{{ movie.genre }} <span aria-hidden="true">·</span> {{ movie.year }}</p>
       </div>
 
+      <div class="control-field movie-category">
+        <label [for]="'category-' + movie.id">Category</label>
+        <select #movieCategory [id]="'category-' + movie.id" [value]="movie.genre"
+          [attr.aria-label]="'Category for ' + movie.title" (change)="updateCategory(movie.id, movieCategory.value)">
+          <option *ngFor="let category of categories" [value]="category"
+            [selected]="category.toLowerCase() === movie.genre.trim().toLowerCase()">{{ category }}</option>
+        </select>
+      </div>
+
       <p class="movie-status" [class.watched]="movie.watched">
         {{ movie.watched ? 'Watched' : 'Not watched yet' }}
       </p>
+
+      <fieldset class="movie-rating">
+        <legend>Your rating <span class="visually-hidden">for {{ movie.title }}</span></legend>
+        <div class="rating-stars">
+          <label *ngFor="let star of stars" class="rating-option">
+            <input
+              type="radio"
+              [name]="'rating-' + movie.id"
+              [value]="star"
+              [checked]="movie.rating === star"
+              [attr.aria-label]="star + (star === 1 ? ' star' : ' stars')"
+              (change)="rateMovie(movie.id, star)"
+            >
+            <span class="rating-star" [class.filled]="star <= (movie.rating ?? 0)" aria-hidden="true">
+              {{ star <= (movie.rating ?? 0) ? '★' : '☆' }}
+            </span>
+          </label>
+        </div>
+        <div class="rating-summary">
+          <span aria-live="polite">{{ movie.rating === null ? 'Not rated yet' : movie.rating + ' / 5 stars' }}</span>
+          <button *ngIf="movie.rating !== null" type="button" class="clear-rating"
+            [attr.aria-label]="'Clear rating for ' + movie.title" (click)="rateMovie(movie.id, null)">
+            Clear rating
+          </button>
+        </div>
+      </fieldset>
 
       <div class="movie-actions">
         <button (click)="toggleWatched(movie.id)">Change status</button>

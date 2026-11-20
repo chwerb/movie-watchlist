@@ -10,8 +10,12 @@
     </div>
 
     <div class="form-field">
-      <label for="genre">Genre</label>
-      <input id="genre" type="text" name="genre" [(ngModel)]="genre" required>
+      <label for="genre">Category</label>
+      <input id="genre" type="text" name="genre" [(ngModel)]="genre" list="movie-categories"
+        placeholder="Choose a category or type your own" required>
+      <datalist id="movie-categories">
+        <option *ngFor="let category of categories" [value]="category"></option>
+      </datalist>
     </div>
 
     <div class="form-field">

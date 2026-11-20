@@ -1,0 +1,75 @@
+<section>
+  <header class="page-heading">
+    <p class="eyebrow">YOUR WATCHLIST IN NUMBERS</p>
+    <h1>Movie statistics</h1>
+    <p>Explore your categories, release years, and what is still on your watchlist.</p>
+  </header>
+
+  <div class="summary-grid" aria-label="Watchlist totals">
+    <article class="summary-card"><p>Total movies</p><strong>{{ total() }}</strong></article>
+    <article class="summary-card"><p>Watched</p><strong>{{ watched() }}</strong></article>
+    <article class="summary-card"><p>Still to watch</p><strong>{{ remaining() }}</strong></article>
+    <article class="summary-card"><p>Completed</p><strong>{{ completion() }}%</strong></article>
+  </div>
+
+  <div *ngIf="total() === 0" class="empty-state">
+    <h2>Your movie story starts here</h2>
+    <p>Add your first movie to see charts about your collection.</p>
+    <a routerLink="/add-movie">Add a movie</a>
+  </div>
+
+  <div *ngIf="total() > 0" class="chart-grid">
+    <figure class="chart-card progress-chart">
+      <figcaption><h2>Watching progress</h2><p>Watched movies and movies still to watch.</p></figcaption>
+      <svg viewBox="0 0 160 160" role="img"
+        [attr.aria-label]="watched() + ' watched, ' + remaining() + ' still to watch, ' + completion() + '% completed'">
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#dce4f2" stroke-width="18" />
+        <circle class="progress-ring" cx="80" cy="80" r="60" fill="none" stroke="#3157a4"
+          stroke-width="18" pathLength="100" [attr.stroke-dasharray]="watchedPercent() + ' 100'"
+          transform="rotate(-90 80 80)" />
+        <text x="80" y="78" text-anchor="middle" class="progress-value">{{ completion() }}%</text>
+        <text x="80" y="98" text-anchor="middle" class="progress-label">completed</text>
+      </svg>
+      <div class="progress-counts">
+        <span><i class="swatch watched-swatch" aria-hidden="true"></i>Watched <strong>{{ watched() }}</strong></span>
+        <span><i class="swatch remaining-swatch" aria-hidden="true"></i>Still to watch <strong>{{ remaining() }}</strong></span>
+      </div>
+    </figure>
+
+    <figure class="chart-card category-chart">
+      <figcaption><h2>Movies by category</h2><p>How your collection is split across categories.</p></figcaption>
+      <div class="chart-legend" aria-hidden="true">
+        <span><i class="swatch watched-swatch"></i>Watched</span>
+        <span><i class="swatch remaining-swatch"></i>Still to watch</span>
+      </div>
+      <div class="bar-list" tabindex="0" role="region" aria-label="Movies by category, scroll to see all categories">
+        <div *ngFor="let group of byCategory()" class="bar-row">
+          <div class="bar-heading"><strong>{{ group.label }}</strong><span>{{ group.total }} {{ group.total === 1 ? 'movie' : 'movies' }}</span></div>
+          <div class="bar-track" aria-hidden="true">
+            <span class="bar-watched" [style.width.%]="group.watched / categoryMax() * 100"></span>
+            <span class="bar-remaining" [style.width.%]="group.remaining / categoryMax() * 100"></span>
+          </div>
+          <p>{{ group.watched }} watched · {{ group.remaining }} still to watch</p>
+        </div>
+      </div>
+    </figure>
+
+    <figure class="chart-card year-chart">
+      <figcaption><h2>Movies by release year</h2><p>The release years of movies in your watchlist.</p></figcaption>
+      <div class="chart-legend" aria-hidden="true">
+        <span><i class="swatch watched-swatch"></i>Watched</span>
+        <span><i class="swatch remaining-swatch"></i>Still to watch</span>
+      </div>
+      <div class="bar-list" tabindex="0" role="region" aria-label="Movies by release year, scroll to see all years">
+        <div *ngFor="let group of byYear()" class="bar-row">
+          <div class="bar-heading"><strong>{{ group.label }}</strong><span>{{ group.total }} {{ group.total === 1 ? 'movie' : 'movies' }}</span></div>
+          <div class="bar-track" aria-hidden="true">
+            <span class="bar-watched" [style.width.%]="group.watched / yearMax() * 100"></span>
+            <span class="bar-remaining" [style.width.%]="group.remaining / yearMax() * 100"></span>
+          </div>
+          <p>{{ group.watched }} watched · {{ group.remaining }} still to watch</p>
+        </div>
+      </div>
+    </figure>
+  </div>
+</section>

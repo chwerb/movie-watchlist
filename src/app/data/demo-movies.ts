@@ -1,0 +1,35 @@
+import { Movie } from '../models/movie';
+
+// Sample personal ratings and watched statuses for exploring the app.
+export const DEMO_MOVIES: readonly Movie[] = [
+  { id: 1, title: 'Interstellar', genre: 'Sci-Fi', year: 2014, watched: false, rating: null },
+  { id: 2, title: 'Titanic', genre: 'Romance', year: 1997, watched: true, rating: null },
+  { id: 3, title: 'Inception', genre: 'Sci-Fi', year: 2010, watched: true, rating: 5 },
+  { id: 4, title: 'The Matrix', genre: 'Sci-Fi', year: 1999, watched: true, rating: 5 },
+  { id: 5, title: 'Arrival', genre: 'Sci-Fi', year: 2016, watched: false, rating: null },
+  { id: 6, title: 'Dune', genre: 'Sci-Fi', year: 2021, watched: false, rating: null },
+  { id: 7, title: 'The Dark Knight', genre: 'Action', year: 2008, watched: true, rating: 5 },
+  { id: 8, title: 'Mad Max: Fury Road', genre: 'Action', year: 2015, watched: true, rating: 4 },
+  { id: 9, title: 'Gladiator', genre: 'Action', year: 2000, watched: false, rating: null },
+  { id: 10, title: 'Jurassic Park', genre: 'Adventure', year: 1993, watched: true, rating: 4 },
+  { id: 11, title: 'Raiders of the Lost Ark', genre: 'Adventure', year: 1981, watched: false, rating: null },
+  { id: 12, title: 'Toy Story', genre: 'Animation', year: 1995, watched: true, rating: 4 },
+  { id: 13, title: 'Spirited Away', genre: 'Animation', year: 2001, watched: false, rating: null },
+  { id: 14, title: 'Spider-Man: Into the Spider-Verse', genre: 'Animation', year: 2018, watched: true, rating: 5 },
+  { id: 15, title: 'The Shawshank Redemption', genre: 'Drama', year: 1994, watched: true, rating: 5 },
+  { id: 16, title: 'Forrest Gump', genre: 'Drama', year: 1994, watched: false, rating: null },
+  { id: 17, title: 'The Godfather', genre: 'Crime', year: 1972, watched: true, rating: 5 },
+  { id: 18, title: 'The Departed', genre: 'Crime', year: 2006, watched: false, rating: null },
+  { id: 19, title: 'La La Land', genre: 'Romance', year: 2016, watched: true, rating: 4 },
+  { id: 20, title: 'Pride & Prejudice', genre: 'Romance', year: 2005, watched: false, rating: null },
+  { id: 21, title: 'Knives Out', genre: 'Mystery', year: 2019, watched: true, rating: 4 },
+  { id: 22, title: 'Sherlock Holmes', genre: 'Mystery', year: 2009, watched: true, rating: 3 },
+  { id: 23, title: 'Get Out', genre: 'Horror', year: 2017, watched: true, rating: 4 },
+  { id: 24, title: 'The Shining', genre: 'Horror', year: 1980, watched: false, rating: null },
+  { id: 25, title: 'The Grand Budapest Hotel', genre: 'Comedy', year: 2014, watched: true, rating: 4 },
+  { id: 26, title: 'Superbad', genre: 'Comedy', year: 2007, watched: true, rating: 2 },
+  { id: 27, title: 'Free Solo', genre: 'Documentary', year: 2018, watched: true, rating: 5 },
+  { id: 28, title: 'My Octopus Teacher', genre: 'Documentary', year: 2020, watched: false, rating: null },
+  { id: 29, title: 'The Lord of the Rings: The Fellowship of the Ring', genre: 'Fantasy', year: 2001, watched: true, rating: 5 },
+  { id: 30, title: 'Parasite', genre: 'Thriller', year: 2019, watched: true, rating: 5 }
+];

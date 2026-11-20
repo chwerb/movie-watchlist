@@ -8,9 +8,10 @@ import { AddMovie } from './components/add-movie/add-movie';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Home } from './components/home/home';
+import { Statistics } from './components/statistics/statistics';
 
 @NgModule({
-  declarations: [App, Navbar, MovieList, AddMovie, Home],
+  declarations: [App, Navbar, MovieList, AddMovie, Home, Statistics],
   imports: [BrowserModule, CommonModule, FormsModule,AppRoutingModule
 ],
   providers: [],

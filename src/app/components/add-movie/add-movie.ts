@@ -14,20 +14,25 @@ export class AddMovie {
   genre = '';
   year = 2026;
 
+  get categories(): string[] {
+    return this.movieService.categoryOptions();
+  }
+
   constructor(private movieService: MovieService) {}
 
   addMovie(): void {
     if (this.title.trim() === '' || this.genre.trim() === '') {
-      alert('Please enter the title and genre');
+      alert('Please enter the title and category');
       return;
     }
 
     const newMovie: Movie = {
       id: Date.now(),
       title: this.title,
-      genre: this.genre,
+      genre: this.categories.find(category => category.toLowerCase() === this.genre.trim().toLowerCase()) ?? this.genre.trim(),
       year: this.year,
-      watched: false
+      watched: false,
+      rating: null
     };
 
     this.movieService.addMovie(newMovie);

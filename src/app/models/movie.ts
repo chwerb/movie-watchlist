@@ -4,4 +4,5 @@ export interface Movie {
   genre: string;
   year: number;
   watched: boolean;
+  rating: number | null;
 }
